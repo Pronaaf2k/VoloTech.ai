@@ -8,22 +8,25 @@
     :root { color-scheme: dark; }
     * { box-sizing: border-box; }
     html, body { margin: 0; width: 1200px; height: 630px; }
-    body { background: #071a3b; color: #f4f4f1; font-family: Arial, Helvetica, sans-serif; }
-    .card { position: relative; width: 1200px; height: 630px; overflow: hidden; padding: 66px 78px; background: linear-gradient(115deg, #081d43 0%, #081d43 64%, #0b2550 100%); }
-    .card::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, transparent 0 72%, rgba(255, 255, 255, .04) 72% 72.12%, transparent 72.12%); }
-    .mark { position: absolute; right: 92px; top: -45px; width: 250px; height: 340px; background: #ff7614; clip-path: polygon(40% 0, 100% 0, 67% 40%, 100% 40%, 23% 100%, 38% 52%, 0 52%); filter: drop-shadow(0 18px 0 rgba(255, 118, 20, .12)); transform: rotate(10deg); }
-    .rule { position: absolute; left: 78px; right: 78px; top: 54px; border-top: 1px solid rgba(255,255,255,.15); }
-    .eyebrow { position: relative; display: inline-block; margin-top: 22px; color: #ff963e; font: 700 15px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .16em; text-transform: uppercase; }
-    h1 { position: relative; max-width: 780px; margin: 90px 0 0; font-size: 76px; line-height: .98; letter-spacing: -.07em; font-weight: 700; }
-    h1 span { color: #9eaabc; }
-    .footer { position: absolute; left: 78px; right: 78px; bottom: 55px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(255,255,255,.15); padding-top: 22px; color: #b5bfd0; font-size: 21px; }
-    .footer strong { color: #f4f4f1; font-weight: 600; }
+    body { background: #111110; color: #f0efea; font-family: Arial, Helvetica, sans-serif; }
+    .card { position: relative; width: 1200px; height: 630px; overflow: hidden; padding: 66px 78px; background: #111110; }
+    .card::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, #111110 0%, #111110e8 40%, #11111044 72%, transparent 100%); z-index: 1; pointer-events: none; }
+    .ribbons { position: absolute; z-index: 0; right: -70px; top: -20px; width: 720px; height: 660px; transform: rotate(-7deg); }
+    .ribbons path { fill: none; stroke: #ff641b; stroke-width: 18; stroke-linecap: round; stroke-linejoin: round; opacity: .94; }
+    .ribbons path:nth-child(2) { opacity: .8; stroke: #f85c18; }.ribbons path:nth-child(3) { opacity: .67; stroke: #e95117; }.ribbons path:nth-child(4) { opacity: .55; stroke: #c84717; }.ribbons path:nth-child(5) { opacity: .42; stroke: #a53e1a; }
+    .rule { position: absolute; left: 78px; right: 78px; top: 54px; border-top: 1px solid rgba(255,255,255,.14); z-index: 2; }
+    .eyebrow { position: relative; z-index: 2; display: inline-block; margin-top: 22px; color: #ff6b2b; font: 700 15px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .16em; text-transform: uppercase; }
+    h1 { position: relative; z-index: 2; max-width: 780px; margin: 90px 0 0; font-size: 76px; line-height: .98; letter-spacing: -.07em; font-weight: 600; }
+    h1 span { color: #85867e; }
+    .footer { position: absolute; z-index: 2; left: 78px; right: 78px; bottom: 55px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(255,255,255,.14); padding-top: 22px; color: #a3a29b; font-size: 21px; }
+    .footer strong { color: #f0efea; font-weight: 600; }
   </style>
 </head>
 <body>
   <main class="card" aria-label="VoloTech.ai social preview">
-    <div class="rule"></div><div class="mark" aria-hidden="true"></div>
-    <div class="eyebrow">AI operations · MCP integrations</div>
+    <div class="rule"></div>
+    <svg class="ribbons" viewBox="0 0 720 660" aria-hidden="true"><path d="M24 420C78 180 260 90 430 182C572 259 688 240 710 88C730-47 562-17 492 72C418 164 436 274 568 350C653 399 664 501 578 560C494 618 381 580 341 475C301 370 273 245 168 238C95 232 54 286 24 420Z"/><path d="M44 420C98 180 280 90 450 182C592 259 708 240 730 88C750-47 582-17 512 72C438 164 456 274 588 350C673 399 684 501 598 560C514 618 401 580 361 475C321 370 293 245 188 238C115 232 74 286 44 420Z"/><path d="M64 420C118 180 300 90 470 182C612 259 728 240 750 88C770-47 602-17 532 72C458 164 476 274 608 350C693 399 704 501 618 560C534 618 421 580 381 475C341 370 313 245 208 238C135 232 94 286 64 420Z"/><path d="M84 420C138 180 320 90 490 182C632 259 748 240 770 88C790-47 622-17 552 72C478 164 496 274 628 350C713 399 724 501 638 560C554 618 441 580 401 475C361 370 333 245 228 238C155 232 114 286 84 420Z"/><path d="M104 420C158 180 340 90 510 182C652 259 768 240 790 88C810-47 642-17 572 72C498 164 516 274 648 350C733 399 744 501 658 560C574 618 461 580 421 475C381 370 353 245 248 238C175 232 134 286 104 420Z"/></svg>
+    <div class="eyebrow">AI built for the way you work</div>
     <h1>Your business.<br><span>In full flow.</span></h1>
     <div class="footer"><strong>VoloTech.ai</strong><span>AI agents for the tools you already use.</span></div>
   </main>

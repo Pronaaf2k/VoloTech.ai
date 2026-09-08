@@ -1,13 +1,20 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
   <title id="title">VoloTech.ai. Your business. In full flow.</title>
   <desc id="desc">AI operations and MCP integrations for the tools your team already uses.</desc>
-  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#081d43"/><stop offset="1" stop-color="#0b2550"/></linearGradient><filter id="shadow"><feDropShadow dx="0" dy="18" stdDeviation="0" flood-color="#ff7614" flood-opacity=".12"/></filter></defs>
-  <rect width="1200" height="630" fill="url(#bg)"/>
-  <path d="M864 0h250l-82 136h82L920 340l36-163H830z" fill="#ff7614" filter="url(#shadow)" transform="rotate(10 975 145)"/>
-  <path d="M78 54H1122M78 552H1122" stroke="#fff" stroke-opacity=".15"/>
-  <text x="78" y="142" fill="#ff963e" font-family="monospace" font-size="15" font-weight="700" letter-spacing="2.4">AI OPERATIONS · MCP INTEGRATIONS</text>
-  <text x="78" y="280" fill="#f4f4f1" font-family="Arial,Helvetica,sans-serif" font-size="76" font-weight="700" letter-spacing="-5">Your business.</text>
-  <text x="78" y="355" fill="#9eaabc" font-family="Arial,Helvetica,sans-serif" font-size="76" font-weight="700" letter-spacing="-5">In full flow.</text>
-  <text x="78" y="592" fill="#f4f4f1" font-family="Arial,Helvetica,sans-serif" font-size="21" font-weight="600">VoloTech.ai</text>
-  <text x="1122" y="592" text-anchor="end" fill="#b5bfd0" font-family="Arial,Helvetica,sans-serif" font-size="21">AI agents for the tools you already use.</text>
+  <rect width="1200" height="630" fill="#111110"/>
+  <path d="M78 54H1122M78 552H1122" stroke="#fff" stroke-opacity=".14"/>
+  <g transform="translate(620 14) rotate(-7)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M24 420C78 180 260 90 430 182C572 259 688 240 710 88C730-47 562-17 492 72C418 164 436 274 568 350C653 399 664 501 578 560C494 618 381 580 341 475C301 370 273 245 168 238C95 232 54 286 24 420Z" stroke="#ff641b" stroke-width="18" opacity=".94"/>
+    <path d="M44 420C98 180 280 90 450 182C592 259 708 240 730 88C750-47 582-17 512 72C438 164 456 274 588 350C673 399 684 501 598 560C514 618 401 580 361 475C321 370 293 245 188 238C115 232 74 286 44 420Z" stroke="#f85c18" stroke-width="18" opacity=".8"/>
+    <path d="M64 420C118 180 300 90 470 182C612 259 728 240 750 88C770-47 602-17 532 72C458 164 476 274 608 350C693 399 704 501 618 560C534 618 421 580 381 475C341 370 313 245 208 238C135 232 94 286 64 420Z" stroke="#e95117" stroke-width="18" opacity=".67"/>
+    <path d="M84 420C138 180 320 90 490 182C632 259 748 240 770 88C790-47 622-17 552 72C478 164 496 274 628 350C713 399 724 501 638 560C554 618 441 580 401 475C361 370 333 245 228 238C155 232 114 286 84 420Z" stroke="#c84717" stroke-width="18" opacity=".55"/>
+    <path d="M104 420C158 180 340 90 510 182C652 259 768 240 790 88C810-47 642-17 572 72C498 164 516 274 648 350C733 399 744 501 658 560C574 618 461 580 421 475C381 370 353 245 248 238C175 232 134 286 104 420Z" stroke="#a53e1a" stroke-width="18" opacity=".42"/>
+  </g>
+  <rect width="1200" height="630" fill="url(#fade)"/>
+  <defs><linearGradient id="fade" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#111110" stop-opacity=".98"/><stop offset=".42" stop-color="#111110" stop-opacity=".82"/><stop offset=".78" stop-color="#111110" stop-opacity=".18"/><stop offset="1" stop-color="#111110" stop-opacity="0"/></linearGradient></defs>
+  <text x="78" y="142" fill="#ff6b2b" font-family="monospace" font-size="15" font-weight="700" letter-spacing="2.4">AI BUILT FOR THE WAY YOU WORK</text>
+  <text x="78" y="280" fill="#f0efea" font-family="Arial,Helvetica,sans-serif" font-size="76" font-weight="600" letter-spacing="-5">Your business.</text>
+  <text x="78" y="355" fill="#85867e" font-family="Arial,Helvetica,sans-serif" font-size="76" font-weight="600" letter-spacing="-5">In full flow.</text>
+  <text x="78" y="592" fill="#f0efea" font-family="Arial,Helvetica,sans-serif" font-size="21" font-weight="600">VoloTech.ai</text>
+  <text x="1122" y="592" text-anchor="end" fill="#a3a29b" font-family="Arial,Helvetica,sans-serif" font-size="21">AI agents for the tools you already use.</text>
 </svg>
