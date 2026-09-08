@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useReducedMotion } from "framer-motion";
 import { siClaude, siOdoo, siHubspot, siN8n, siGoogledrive, siWhatsapp, siGmail, siGooglecalendar, siNotion, siLinear, siGithub, siAirtable, siZapier, siMake, siDiscord, siZoho } from "simple-icons";
 
@@ -18,7 +18,31 @@ export function Integrations() {
   const firstGroup = useRef<HTMLDivElement>(null);
   const dragging = useRef(false);
   const [isDragging, setIsDragging] = useState(false);
-  const start = useRef({ x: 0, scroll: 0 });
+  const lastPointerX = useRef(0);
+
+  const wrapScrollPosition = () => {
+    const viewport = rail.current;
+    const loopWidth = firstGroup.current?.offsetWidth ?? 0;
+    if (!viewport || !loopWidth) return;
+
+    if (viewport.scrollLeft >= loopWidth * 2) viewport.scrollLeft -= loopWidth;
+    else if (viewport.scrollLeft < loopWidth) viewport.scrollLeft += loopWidth;
+  };
+
+  useLayoutEffect(() => {
+    const viewport = rail.current;
+    const group = firstGroup.current;
+    if (!viewport || !group) return;
+
+    const placeAtMiddleCopy = () => {
+      viewport.scrollLeft = group.offsetWidth;
+    };
+
+    placeAtMiddleCopy();
+    const observer = new ResizeObserver(placeAtMiddleCopy);
+    observer.observe(group);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     let frame = 0;
@@ -30,7 +54,7 @@ export function Integrations() {
       const loopWidth = firstGroup.current?.offsetWidth ?? 0;
       if (viewport && loopWidth && !dragging.current && !reduced) {
         viewport.scrollLeft += elapsed * .026;
-        if (viewport.scrollLeft >= loopWidth) viewport.scrollLeft -= loopWidth;
+        wrapScrollPosition();
       }
       frame = requestAnimationFrame(tick);
     };
@@ -40,8 +64,9 @@ export function Integrations() {
 
   return <section className="integrations shell" aria-label="Business tool integrations">
     <div className="integrations-heading"><p>Built around the tools<br /><span>you already work with.</span></p></div>
-    <div className={`integration-viewport${isDragging ? " is-dragging" : ""}`} ref={rail} role="region" aria-roledescription="carousel" aria-label="Connected business tools" tabIndex={0} onPointerDown={event => { if (event.pointerType === "mouse" && event.button !== 0) return; dragging.current = true; setIsDragging(true); start.current = { x: event.clientX, scroll: event.currentTarget.scrollLeft }; event.currentTarget.setPointerCapture(event.pointerId); }} onPointerMove={event => { if (!dragging.current) return; event.currentTarget.scrollLeft = start.current.scroll - (event.clientX - start.current.x); }} onPointerUp={event => { dragging.current = false; setIsDragging(false); event.currentTarget.releasePointerCapture(event.pointerId); }} onPointerCancel={() => { dragging.current = false; setIsDragging(false); }}>
+    <div className={`integration-viewport${isDragging ? " is-dragging" : ""}`} ref={rail} role="region" aria-roledescription="carousel" aria-label="Connected business tools" tabIndex={0} onDragStart={event => event.preventDefault()} onPointerDown={event => { if (event.pointerType === "mouse" && event.button !== 0) return; dragging.current = true; setIsDragging(true); lastPointerX.current = event.clientX; event.currentTarget.setPointerCapture(event.pointerId); }} onPointerMove={event => { if (!dragging.current) return; event.currentTarget.scrollLeft += lastPointerX.current - event.clientX; lastPointerX.current = event.clientX; wrapScrollPosition(); }} onPointerUp={event => { dragging.current = false; setIsDragging(false); if (event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId); }} onPointerCancel={() => { dragging.current = false; setIsDragging(false); }} onLostPointerCapture={() => { dragging.current = false; setIsDragging(false); }}>
       <div className="integration-logos">
+        <div className="integration-group" aria-hidden="true">{tools.map(tool => <div className="integration-logo" key={`leading-${tool.slug}`}>{tool.path ? <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d={tool.path} /></svg> : <span className="integration-mark" aria-hidden="true">{"mark" in tool ? tool.mark : ""}</span>}<span>{tool.title}</span></div>)}</div>
         <div className="integration-group" ref={firstGroup}>{tools.map(tool => <div className="integration-logo" key={tool.slug}>{tool.path ? <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d={tool.path} /></svg> : <span className="integration-mark" aria-hidden="true">{"mark" in tool ? tool.mark : ""}</span>}<span>{tool.title}</span></div>)}</div>
         <div className="integration-group" aria-hidden="true">{tools.map(tool => <div className="integration-logo" key={`duplicate-${tool.slug}`}>{tool.path ? <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d={tool.path} /></svg> : <span className="integration-mark" aria-hidden="true">{"mark" in tool ? tool.mark : ""}</span>}<span>{tool.title}</span></div>)}</div>
       </div>
