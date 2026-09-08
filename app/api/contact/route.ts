@@ -32,7 +32,7 @@ export async function POST(request: Request) {
     phone: typeof body.phone === "string" ? body.phone.trim().slice(0, 60) : "",
     interest: interest.slice(0, 160),
     message: message.slice(0, 3000),
-    source: "volo-ai-website",
+    source: "volotech-ai-website",
   };
 
   const endpoint = process.env.CONTACT_API_URL;
