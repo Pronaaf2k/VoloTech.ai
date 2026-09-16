@@ -22,7 +22,8 @@ export function Integrations() {
 
   const wrapScrollPosition = () => {
     const viewport = rail.current;
-    const loopWidth = firstGroup.current?.offsetWidth ?? 0;
+    const group = firstGroup.current;
+    const loopWidth = group ? group.getBoundingClientRect().left - (group.previousElementSibling?.getBoundingClientRect().left ?? 0) : 0;
     if (!viewport || !loopWidth) return;
 
     if (viewport.scrollLeft >= loopWidth * 2) viewport.scrollLeft -= loopWidth;
@@ -45,16 +46,26 @@ export function Integrations() {
   }, []);
 
   useEffect(() => {
+    if (reduced) return;
     let frame = 0;
     let last = performance.now();
+    let pendingPixels = 0;
     const tick = (now: number) => {
       const elapsed = Math.min(32, now - last);
       last = now;
       const viewport = rail.current;
       const loopWidth = firstGroup.current?.offsetWidth ?? 0;
-      if (viewport && loopWidth && !dragging.current && !reduced) {
-        viewport.scrollLeft += elapsed * .026;
-        wrapScrollPosition();
+      if (viewport && loopWidth && !dragging.current) {
+        // Keep subpixel movement between frames instead of losing it to scroll rounding.
+        pendingPixels += elapsed * .026;
+        const pixels = Math.floor(pendingPixels);
+        if (pixels > 0) {
+          viewport.scrollLeft += pixels;
+          pendingPixels -= pixels;
+          wrapScrollPosition();
+        }
+      } else {
+        pendingPixels = 0;
       }
       frame = requestAnimationFrame(tick);
     };
