@@ -50,8 +50,8 @@ export async function POST(request: Request) {
       return NextResponse.json({ message: "We could not reach our enquiry service. Your details are still in the form. Please try again." }, { status: 502 });
     }
   } else {
-    return NextResponse.json({ message: "Contact delivery is being configured. Please try again shortly." }, { status: 503 });
+    return NextResponse.json({ message: "Enquiries are temporarily unavailable. Your message has not been sent. Your details are still in the form; please try again later." }, { status: 503 });
   }
 
-  return NextResponse.json({ message: "Thanks. We’ll review your workflow and get back to you shortly." }, { status: 201 });
+  return NextResponse.json({ message: "Thank you. Your enquiry has been sent. We will follow up by email to discuss the next step." }, { status: 201 });
 }

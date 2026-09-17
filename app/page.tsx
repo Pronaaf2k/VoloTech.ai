@@ -1,55 +1,41 @@
-import Image from "next/image";
-import { PiArrowDownRight, PiArrowUpRight, PiArrowRight, PiCheck } from "react-icons/pi";
-import { ContactForm } from "@/components/contact-form";
-import { IndustryExplorer } from "@/components/industry-explorer";
-import { WorkflowDemo } from "@/components/workflow-demo";
-import { Reveal, HeroArtwork, MobileNav } from "@/components/motion-elements";
-import { Integrations } from "@/components/integrations";
+import Link from "next/link";
+import { PiArrowRight, PiArrowUpRight, PiFlowArrow, PiHeadset, PiStack, PiWrench } from "react-icons/pi";
+import { HeroArtwork } from "@/components/hero-artwork";
+import { TechnologyStack } from "@/components/technology-stack";
+import { SiteFooter, SiteHeader } from "@/components/site-chrome";
 
-function Brand() {
-  return <span className="brand" translate="no"><Image src="/volo-mark.webp" alt="" width={32} height={32} /><span>VoloTech<span className="brand-domain">.ai</span></span></span>;
-}
+const destinations = [
+  { index: "01", icon: PiStack, title: "Services", copy: "Websites, applications, integrations, and the systems that keep them useful.", href: "/services", link: "See what we build" },
+  { index: "02", icon: PiFlowArrow, title: "Work", copy: "A few common project shapes, from customer portals to data moving between tools.", href: "/work", link: "View project examples" },
+  { index: "03", icon: PiWrench, title: "How we work", copy: "A straightforward route from a business problem to a system your team can own.", href: "/how-we-work", link: "See the process" },
+  { index: "04", icon: PiHeadset, title: "Support", copy: "Help with a live system, a difficult bug, or the technical work after launch.", href: "/support", link: "Get technical support" },
+];
 
 export default function Home() {
   return <>
     <a className="skip-link" href="#main-content">Skip to main content</a>
-    <header className="site-header shell">
-      <a href="#top" aria-label="VoloTech.ai home"><Brand /></a>
-      <nav className="desktop-nav" aria-label="Main navigation"><a href="#solutions">Solutions</a><a href="#industries">Industries</a><a href="#contact">Contact</a></nav>
-      <a className="nav-cta" href="#contact">Get started <PiArrowUpRight aria-hidden="true" /></a>
-      <MobileNav />
-    </header>
-    <main id="main-content">
-      <section className="hero shell" id="top">
+    <SiteHeader />
+    <main id="main-content" tabIndex={-1}>
+      <section className="home-hero shell" aria-labelledby="hero-title">
+        <div className="hero-copy">
+          <p className="eyebrow">Business technology partner</p>
+          <h1 id="hero-title">Build the thing your business is missing.</h1>
+          <p className="hero-description">VoloTech.ai helps businesses make better use of the web, their data, and the tools they already pay for.</p>
+          <div className="hero-actions"><Link className="button button-primary" href="/services">Explore services <PiArrowUpRight aria-hidden="true" /></Link><Link className="text-link" href="/contact">Start a project <PiArrowRight aria-hidden="true" /></Link></div>
+        </div>
         <HeroArtwork />
-        <div className="hero-content">
-          <Reveal><p className="eyebrow">AI built for the way you work</p></Reveal>
-          <Reveal delay={0.08}><h1>Your business.<br /><span>In full flow.</span></h1></Reveal>
-          <Reveal delay={0.16}><p className="hero-description">AI agents that connect your tools, move work forward,<br className="desktop-break" /> and keep your people in control.</p></Reveal>
-          <Reveal delay={0.24}><div className="hero-actions"><a className="button button-primary" href="#contact">Put AI to work <PiArrowUpRight aria-hidden="true" /></a><a className="text-link" href="#solutions">Explore the possibilities <PiArrowDownRight aria-hidden="true" /></a></div></Reveal>
+      </section>
+
+      <TechnologyStack />
+      <section className="destination-section" aria-labelledby="destination-title">
+        <div className="shell">
+          <div className="section-heading"><p className="eyebrow">Find your starting point</p><h2 id="destination-title">Pick the part you need.</h2><p className="section-intro">Each page covers one part of the work. Start with the closest match, then bring us the details.</p></div>
+          <div className="destination-grid">{destinations.map(({ index, icon: Icon, title, copy, href, link }) => <article className="destination-card" key={href}><div className="card-top"><span className="card-index">{index}</span><Icon aria-hidden="true" /></div><h3>{title}</h3><p>{copy}</p><Link className="text-link" href={href}>{link} <PiArrowUpRight aria-hidden="true" /></Link></article>)}</div>
         </div>
       </section>
-      <Integrations />
-      <section className="solutions-section shell section-space" id="solutions">
-        <Reveal><h2>Less passing work around.<br /><span className="muted">More moving it forward.</span></h2><p className="section-intro">Your systems already hold the context. We connect it to AI that can do something useful with it.</p></Reveal>
-        <WorkflowDemo />
-      </section>
-      <section className="industries-section section-space" id="industries"><div className="shell">
-        <Reveal><p className="eyebrow">Built for businesses in Bangladesh</p><h2>Real operations.<br />Real places to start.</h2><p className="section-intro">Start with the handoffs that slow your team down.</p></Reveal>
-        <IndustryExplorer />
-      </div></section>
-      <section className="approach shell section-space">
-        <Reveal><div className="approach-heading"><PiArrowDownRight aria-hidden="true" /><h2>Start small.<br /><span className="muted">Connect what matters.</span></h2></div></Reveal>
-        <div className="approach-grid grid grid-cols-1 md:grid-cols-3">
-          {[['Find the friction', 'Identify one repeated workflow, the people involved, and where information gets lost.'], ['Build the connection', 'Bring the right systems together with clear permissions and human approval.'], ['Put it to work', 'Give your team a practical AI workflow with clear ownership and recorded decisions.']].map(([title, copy], i) => <Reveal delay={i * 0.08} key={title}><span className="step-number">0{i + 1}</span><h3>{title}</h3><p>{copy}</p></Reveal>)}
-        </div>
-      </section>
-      <section className="contact-section shell section-space" id="contact">
-        <Reveal><div className="contact-copy"><h2>Make room<br />for better<br /><span>work.</span></h2><p>Tell us where work gets stuck. We’ll identify a practical first AI integration and the systems it needs to connect.</p><div className="contact-note"><PiCheck aria-hidden="true" /> Your existing tools. A useful first step.</div></div></Reveal>
-        <ContactForm />
-      </section>
+
+      <section className="home-note shell" aria-label="VoloTech.ai approach summary"><p className="eyebrow">A useful place to begin</p><p>Some businesses need a new site. Others need a small fix that removes an expensive daily annoyance. We scope the work around that difference.</p><Link className="text-link" href="/how-we-work">How we work <PiArrowRight aria-hidden="true" /></Link></section>
     </main>
-    <footer className="shell"><div className="footer-top"><a href="#top" aria-label="VoloTech.ai home"><Brand /></a><p>AI agents and connected workflows<br />for businesses in Bangladesh.</p><a className="text-link" href="#top">Back to top <PiArrowUpRight aria-hidden="true" /></a></div><div className="footer-bottom"><small>© {new Date().getFullYear()} VoloTech.ai</small><nav aria-label="Footer navigation"><a href="#solutions">Solutions</a><a href="#industries">Industries</a><a href="#contact">Contact <PiArrowRight aria-hidden="true" /></a></nav></div></footer>
+    <SiteFooter />
   </>;
 }
-

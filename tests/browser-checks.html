@@ -1,0 +1,30 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Website QA</title><style>body{font:16px system-ui;background:#faf9f5;color:#222}iframe{height:850px;border:1px solid #aaa}pre{white-space:pre-wrap}button{padding:12px}</style><h1>Website QA</h1><button id="run">Run checks</button><pre id="results">Ready</pre><iframe title="Website under test" src="/"></iframe><script>
+const frame=document.querySelector('iframe'), output=document.querySelector('pre');
+const pause=ms=>new Promise(r=>setTimeout(r,ms));
+function log(name,pass,details=''){output.textContent+=`\n${pass?'PASS':'FAIL'} ${name} ${details}`;}
+document.querySelector('button').onclick=async()=>{
+ output.textContent='Running'; const w=frame.contentWindow,d=w.document;
+ try{
+  const script=d.createElement('script');script.src='/__qa-axe.js';d.head.append(script);await new Promise((r,j)=>{script.onload=r;script.onerror=j});
+  for(const width of [320,390,768,1024,1440]){
+   frame.style.width=width+'px';await pause(150);
+   log('No horizontal overflow '+width,d.documentElement.scrollWidth<=d.documentElement.clientWidth);
+  }
+  for(const theme of ['light','dark']){
+   const style=d.createElement('style');style.textContent=theme==='light'?':root{--bg:#f7f6f2;--surface:#eeede7;--ink:#252622;--muted:#5d6058;--line:#d1d2c8;--accent:#a83d17;--field:#fcfbf8;color-scheme:light}':':root{--bg:#161714;--surface:#20221c;--ink:#f0f1e9;--muted:#b2b6a8;--line:#42463a;--accent:#ff9566;--field:#191b16;color-scheme:dark}';d.head.append(style);
+   for(const width of [390,1440]){frame.style.width=width+'px';await pause(150);const report=await w.axe.run(d,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa','wcag22aa']}});log('Axe '+theme+' '+width,report.violations.length===0,JSON.stringify(report.violations.map(v=>({id:v.id,nodes:v.nodes.map(n=>n.target)}))));}style.remove();
+  }
+  log('Every internal link has a target',[...d.querySelectorAll('a[href^="#"]')].every(a=>d.getElementById(a.hash.slice(1))));
+  log('One H1',d.querySelectorAll('h1').length===1);
+  const form=d.querySelector('form');log('Empty form is invalid',!form.checkValidity());
+  d.querySelector('a[href="#support-request"]').click();await pause(100);log('Support CTA selects support',form.elements.interest.value==='Technical support or maintenance');
+  form.elements.name.value='Website QA';form.elements.email.value='qa@example.com';form.elements.message.value='Test enquiry for local website checks.';
+  form.elements.email.value='invalid';log('Invalid email rejected',!form.checkValidity());form.elements.email.value='qa@example.com';log('Valid form accepted',form.checkValidity());
+  const originalFetch=w.fetch;let captured;
+  w.fetch=async(url,opts)=>{captured=JSON.parse(opts.body);await pause(200);return new Response(JSON.stringify({message:'Test service unavailable'}),{status:503,headers:{'Content-Type':'application/json'}})};
+  form.requestSubmit();await pause(30);log('Sending disables submit',form.querySelector('button').disabled);await pause(400);log('Error announced and input retained',d.querySelector('[role="status"]').textContent==='Test service unavailable'&&form.elements.name.value==='Website QA');
+  w.fetch=async()=>new Response(JSON.stringify({message:'Test enquiry received'}),{status:201,headers:{'Content-Type':'application/json'}});form.requestSubmit();await pause(150);log('Success announced and form reset',d.querySelector('[role="status"]').textContent==='Test enquiry received'&&form.elements.name.value==='');log('Payload includes chosen service',captured.interest==='Technical support or maintenance');w.fetch=originalFetch;
+  output.textContent+='\nDone. Form responses mocked; no external enquiries sent.';
+ }catch(e){output.textContent+='\nERROR '+e.stack;}
+};
+</script></html>
