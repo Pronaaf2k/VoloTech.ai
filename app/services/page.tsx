@@ -1,10 +1,11 @@
 import Link from "next/link";
+import { TechnologyStack } from "@/components/technology-stack";
 import { PiArrowRight, PiArrowUpRight, PiBrowser, PiFlowArrow, PiPlugsConnected, PiStack, PiWrench } from "react-icons/pi";
 import { SiteFooter, SiteHeader } from "@/components/site-chrome";
 import { HeroAside } from "@/components/page-illustration";
 
 export const metadata = {
-  title: "Services | VoloTech.ai",
+  title: "Services | VoloTech",
   description: "Websites, applications, integrations, automation, and technical support for growing businesses.",
 };
 
@@ -30,6 +31,7 @@ export default function ServicesPage() {
         <h2 id="offerings-title">Start with the outcome.</h2>
         <div className="service-grid">{services.map(({ icon: Icon, title, summary, includes }, index) => <article className="service-card" key={title}><div className="service-card-top"><Icon aria-hidden="true" /><span className="card-index">{String(index + 1).padStart(2, "0")}</span></div><h3>{title}</h3><p className="service-summary">{summary}</p><p className="service-includes">{includes}</p><Link className="text-link" href="/contact">Discuss this service <PiArrowUpRight aria-hidden="true" /></Link></article>)}</div>
       </section>
+      <TechnologyStack />
       <section className="content-section shell"><div className="page-cta"><h2>Have a problem that does not fit one box?</h2><Link className="button button-primary" href="/contact">Tell us about it <PiArrowRight aria-hidden="true" /></Link></div></section>
     </main>
     <SiteFooter />

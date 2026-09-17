@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
-  <title id="title">VoloTech.ai. Your business. In full flow.</title>
+  <title id="title">VoloTech. Your business. In full flow.</title>
   <desc id="desc">AI operations and MCP integrations for the tools your team already uses.</desc>
   <rect width="1200" height="630" fill="#111110"/>
   <path d="M78 54H1122M78 552H1122" stroke="#fff" stroke-opacity=".14"/>
@@ -15,6 +15,6 @@
   <text x="78" y="142" fill="#ff6b2b" font-family="monospace" font-size="15" font-weight="700" letter-spacing="2.4">AI BUILT FOR THE WAY YOU WORK</text>
   <text x="78" y="280" fill="#f0efea" font-family="Arial,Helvetica,sans-serif" font-size="76" font-weight="600" letter-spacing="-5">Your business.</text>
   <text x="78" y="355" fill="#85867e" font-family="Arial,Helvetica,sans-serif" font-size="76" font-weight="600" letter-spacing="-5">In full flow.</text>
-  <text x="78" y="592" fill="#f0efea" font-family="Arial,Helvetica,sans-serif" font-size="21" font-weight="600">VoloTech.ai</text>
+  <text x="78" y="592" fill="#f0efea" font-family="Arial,Helvetica,sans-serif" font-size="21" font-weight="600">VoloTech</text>
   <text x="1122" y="592" text-anchor="end" fill="#a3a29b" font-family="Arial,Helvetica,sans-serif" font-size="21">AI agents for the tools you already use.</text>
 </svg>

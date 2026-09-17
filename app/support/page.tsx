@@ -4,7 +4,7 @@ import { SiteFooter, SiteHeader } from "@/components/site-chrome";
 import { HeroAside } from "@/components/page-illustration";
 
 export const metadata = {
-  title: "Technical support | VoloTech.ai",
+  title: "Technical support | VoloTech",
   description: "Technical support, maintenance, deployment, and troubleshooting for business systems.",
 };
 

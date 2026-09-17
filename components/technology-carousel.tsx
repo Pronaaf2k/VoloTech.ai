@@ -29,7 +29,7 @@ export function TechnologyCarousel({ tools }: { tools: Tool[] }) {
     return () => { clearInterval(timer); observer.disconnect(); resize.disconnect(); };
   }, []);
   return <section className="technology-section shell" aria-label="Technology stack">
-    <div className="technology-heading"><div><p className="eyebrow">The tools behind the work</p><h2>A stack for each job.</h2></div></div>
+    <div className="technology-heading"><div><h2>A stack for each job.</h2></div></div>
     <div className="technology-carousel" ref={rail} tabIndex={0} role="region" aria-label="Technology logos. Drag horizontally or use the arrow keys to explore."
       onPointerDown={event => {
         if (!event.isPrimary || event.button !== 0) return;

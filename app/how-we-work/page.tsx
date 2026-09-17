@@ -4,15 +4,15 @@ import { SiteFooter, SiteHeader } from "@/components/site-chrome";
 import { HeroAside } from "@/components/page-illustration";
 
 export const metadata = {
-  title: "How we work | VoloTech.ai",
+  title: "How we work | VoloTech",
   description: "A clear scope, working reviews, and a useful handover for business technology projects.",
 };
 
 const steps = [
-  ["Understand the job", "We review the business problem, existing tools, users, and constraints. We identify what needs to change and what is worth keeping."],
-  ["Agree on the scope", "We define deliverables, priorities, budget, dependencies, and acceptance criteria before the build starts."],
-  ["Build and review", "You see working progress. We test the important user journeys, permissions, and integrations before launch."],
-  ["Launch and support", "We agree on deployment, documentation, access handover, and maintenance. Ownership stays clear after delivery."],
+  ["Scope it together", "We review the business problem, users, and existing tools. Together we agree on priorities, deliverables, budget, dependencies, and acceptance criteria.", "You get a clear scope."],
+  ["Build, then review", "You try working versions. We make decisions together, test the important journeys, and agree on changes before adding them.", "You get working software."],
+  ["Launch with confidence", "We check permissions and integrations, prepare deployment, and hand over the code, access, and documentation.", "You get a system you own."],
+  ["Keep it useful", "We agree on maintenance, responsibilities, and how to get help as your business changes.", "You get a support plan."],
 ];
 
 const faqs = [
@@ -34,7 +34,7 @@ export default function HowWeWorkPage() {
       <section className="content-section shell" aria-labelledby="process-title">
         <p className="eyebrow">The process</p>
         <h2 id="process-title">A few steps, in the right order.</h2>
-        <ol className="process-list">{steps.map(([title, copy]) => <li key={title}><h3>{title}</h3><p>{copy}</p></li>)}</ol>
+        <ol className="process-list">{steps.map(([title, copy, result]) => <li key={title}><h3>{title}</h3><p>{copy}</p><strong>{result}</strong></li>)}</ol>
         <div className="working-agreement"><h3>What to clarify before we start</h3><ul>{["Who owns the code, accounts, and data", "What is included and what costs extra", "How progress and changes are reviewed", "Who handles maintenance and support"].map(item => <li key={item}><PiCheck aria-hidden="true" />{item}</li>)}</ul></div>
       </section>
       <section className="content-section shell faq" aria-labelledby="faq-title"><div><p className="eyebrow">Common questions</p><h2 id="faq-title">A few practical answers.</h2></div><div className="faq-list">{faqs.map(([question, answer]) => <details key={question}><summary>{question}<span aria-hidden="true">+</span></summary><p>{answer}</p></details>)}</div></section>

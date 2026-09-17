@@ -56,7 +56,7 @@ function ribbonGeometry(offset: number) {
 }
 
 function StudioLighting() {
-  const { gl, scene } = useThree();
+  const { gl, scene, invalidate } = useThree();
   useEffect(() => {
     const generator = new THREE.PMREMGenerator(gl);
     const room = new RoomEnvironment();
@@ -65,8 +65,9 @@ function StudioLighting() {
     // eslint-disable-next-line react-hooks/immutability
     scene.environment = environment.texture;
     scene.environmentIntensity = 0.95;
+    invalidate();
     return () => { scene.environment = null; environment.dispose(); room.dispose(); generator.dispose(); };
-  }, [gl, scene]);
+  }, [gl, scene, invalidate]);
   return <><ambientLight intensity={.3} /><directionalLight position={[2, 5, 4]} intensity={2} color="#ffe5ce" /><directionalLight position={[-4, -2, 2]} intensity={1.8} color="#ff6b2b" /></>;
 }
 

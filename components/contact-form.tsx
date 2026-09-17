@@ -25,7 +25,7 @@ export function ContactForm() {
       setState({ status: "error", message: error instanceof Error && error.name !== "TimeoutError" ? error.message : "The request timed out. Your details are still in the form. Please try again." });
     } finally { submitting.current = false; }
   }
-  return <form className="contact-form" id="support-request" onSubmit={handleSubmit} aria-label="Contact VoloTech.ai" aria-busy={state.status === "sending"}>
+  return <form className="contact-form" id="support-request" onSubmit={handleSubmit} aria-label="Contact VoloTech" aria-busy={state.status === "sending"}>
     <div className="form-heading"><strong>Project & support enquiry</strong><p>Fields marked * are required.</p></div>
     <div className="field-row"><label>Full name *<input name="name" autoComplete="name" maxLength={120} required /></label><label>Email *<input name="email" type="email" autoComplete="email" maxLength={180} spellCheck={false} required /></label></div>
     <label>Company <span className="optional">Optional</span><input name="company" autoComplete="organization" maxLength={160} /></label>

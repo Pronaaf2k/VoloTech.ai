@@ -1,4 +1,4 @@
-# VoloTech.ai website
+# VoloTech website
 
 Next.js website for business technology services. The homepage uses server-rendered HTML and CSS, with client components for navigation, the enquiry form, and the retained ribbon sculpture. The original orange Three.js ribbon sculpture is preserved as a brand element, with the supplied image as an immediate fallback. Do not remove or replace this artwork. Never use ImageGen for this project.
 
@@ -32,3 +32,11 @@ The server validates enquiries and forwards name, email, company, interest, mess
 Tested at 320, 390, 768, 1024, and 1440 CSS pixels. Axe checks cover 390 and 1440 pixels in both themes. Manual checks include mobile navigation, Escape dismissal, support selection, FAQ disclosure, and visual inspection. Automated accessibility checks do not replace assistive-technology user testing.
 
 The interactive ribbon loads on desktop. Mobile and reduced-motion visitors see the supplied ribbon image without the WebGL runtime. The original Three.js code is retained. Its current dependency emits a non-fatal THREE.Clock deprecation warning in desktop browsers.
+
+## September 2026 studio redesign
+
+The homepage now leads with the business need, followed by illustrative project scopes, the delivery process, a compact tool list, and the contact invitation. Shared styles cover all six existing routes. Satoshi uses the original variable WOFF2 from Fontshare with its license in `public/fonts/satoshi`; IBM Plex Mono is reserved for labels and technical details.
+
+`public/ribbon-still.png` is a transparent capture of the existing Three.js sculpture. It renders immediately on all devices. Fine-pointer interaction loads the original 3D renderer on demand, while reduced-motion visitors retain the still. The renderer pauses outside the viewport and in background tabs.
+
+See `tests/REDESIGN.md` for validation and content gaps. The reproducible browser check is `node tests/redesign-checks.cjs` with a production server on port 3001. It needs Playwright, Edge, and axe-core in the test environment. Optional `PLAYWRIGHT_MODULE`, `AXE_SCRIPT`, and `TEST_BASE_URL` variables override their locations. No live enquiries are sent by this check.

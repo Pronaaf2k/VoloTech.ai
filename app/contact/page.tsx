@@ -2,8 +2,8 @@ import { ContactForm } from "@/components/contact-form";
 import { SiteFooter, SiteHeader } from "@/components/site-chrome";
 
 export const metadata = {
-  title: "Contact | VoloTech.ai",
-  description: "Tell VoloTech.ai what you want to build, connect, or fix.",
+  title: "Contact | VoloTech",
+  description: "Tell VoloTech what you want to build, connect, or fix.",
 };
 
 export default function ContactPage() {
